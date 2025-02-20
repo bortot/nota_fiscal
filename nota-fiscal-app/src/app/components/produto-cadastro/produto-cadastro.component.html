@@ -1,0 +1,30 @@
+<p-card [style]="{height: '100%'}">
+  <ng-template #content>
+    <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+      <div class="form-container">
+        <div class="form-field">
+          <p-float-label>
+            <input type="text" pInputText formControlName="codigo" required />
+            <label>Codigo</label>
+          </p-float-label>
+        </div>
+
+        <div class="form-field">
+          <p-float-label>
+            <input type="text" pInputText formControlName="descricao" required />
+            <label>Descricao</label>
+          </p-float-label>
+        </div>
+
+        <div class="form-field">
+          <p-select [options]="situacaoEnum" formControlName="situacao" placeholder="Situacao" required />
+        </div>
+      </div>
+    </form>
+  </ng-template>
+
+  <ng-content #footer>
+    <button type="submit" [disabled]="!produtoForm.valid">Submit</button>
+  </ng-content>
+</p-card>
+

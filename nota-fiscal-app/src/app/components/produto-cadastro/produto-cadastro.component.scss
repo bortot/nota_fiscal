@@ -1,0 +1,16 @@
+form {
+  margin-top: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 250px;
+}
