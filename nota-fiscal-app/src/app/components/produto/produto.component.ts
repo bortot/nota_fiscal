@@ -48,7 +48,7 @@ export class ProdutoComponent {
   }
 
   loadData(): void {
-    this.produtoService.getRecords(this.currentPage, this.rows).subscribe(response => {
+    this.produtoService.page(this.currentPage, this.rows).subscribe(response => {
       this.produtoList = response.data;
       this.totalRecords = response.totalRecords;
     });
@@ -65,7 +65,7 @@ export class ProdutoComponent {
 
   removerProduto = () => {
     if (this.selectedProduct?.id == null) return;
-    this.produtoService.deleteRecord(this.selectedProduct.id);
+    this.produtoService.delete(this.selectedProduct.id);
   }
 
   pageChange(event: any) {

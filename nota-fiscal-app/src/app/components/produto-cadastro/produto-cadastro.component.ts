@@ -5,6 +5,12 @@ import {Produto} from '../../class/produto';
 import {Select} from 'primeng/select';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Card} from 'primeng/card';
+import {ProdutoService} from '../../services/produto.service';
+import {Button} from 'primeng/button';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Tooltip} from 'primeng/tooltip';
+import {Menubar} from 'primeng/menubar';
+import {Divider} from 'primeng/divider';
 
 @Component({
   selector: 'app-produto-cadastro',
@@ -14,24 +20,63 @@ import {Card} from 'primeng/card';
     Select,
     FloatLabel,
     ReactiveFormsModule,
-    Card
+    Card,
+    Button,
+    Tooltip,
+    Menubar,
+    Divider
   ],
   templateUrl: './produto-cadastro.component.html',
-  styleUrl: './produto-cadastro.component.scss'
+  styleUrl: './produto-cadastro.component.scss',
+  providers: [ ProdutoService, Router ]
 })
 export class ProdutoCadastroComponent {
-  produto: Produto = new Produto();
-  situacaoEnum: string[] = ['Ativo', 'Inativo'];
+  produtoId?: number = undefined;
+  situacaoEnum: string[] = ['ATIVO', 'INATIVO'];
 
   produtoForm: FormGroup = new FormGroup({
     codigo: new FormControl(''),
     descricao: new FormControl(''),
-    situacao: new FormControl(''),
+    situacao: new FormControl('ATIVO'),
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private produtoService: ProdutoService, private router : Router, private route: ActivatedRoute) {}
 
-  onSubmit() {
+  ngOnInit() {
+    if (this.route.snapshot.params['id']) {
+      this.produtoId = this.route.snapshot.params['id'];
 
+      this.produtoService.findById(this.produtoId!).subscribe(produto => {
+        if (!produto) {
+          this.router.navigate(['/produto/cadastro']);
+          return;
+        }
+
+        this.produtoForm.get('codigo')!.setValue(produto.codigo);
+        this.produtoForm.get('descricao')!.setValue(produto.descricao);
+        this.produtoForm.get('situacao')!.setValue(produto.situacao);
+      });
+    }
+  }
+
+  save() {
+    if (this.produtoId) {
+      this.update();
+      return;
+    }
+
+    this.produtoService.save(this.produtoForm.value).subscribe(response => {
+      this.router.navigate(['/produto']);
+    });
+  }
+
+  update() {
+    this.produtoService.update(this.produtoId!, this.produtoForm.value).subscribe(response => {
+      this.router.navigate(['/produto']);
+    });
+  }
+
+  voltar() {
+    this.router.navigate(['/produto']);
   }
 }

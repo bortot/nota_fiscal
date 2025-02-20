@@ -1,6 +1,10 @@
-<p-card [style]="{height: '100%'}">
+<p-card [style]="{height: 'calc(100% - 110px)'}">
+  <ng-template #header>
+    <p-button (onClick)="voltar()" label="Voltar" severity="contrast" icon="pi pi-arrow-left" size="small" outlined="true" ></p-button>
+  </ng-template>
+
   <ng-template #content>
-    <form [formGroup]="produtoForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="produtoForm">
       <div class="form-container">
         <div class="form-field">
           <p-float-label>
@@ -23,8 +27,14 @@
     </form>
   </ng-template>
 
-  <ng-content #footer>
-    <button type="submit" [disabled]="!produtoForm.valid">Submit</button>
-  </ng-content>
+<!--  <ng-template style="margin-top: 20px" #footer>-->
+<!--    <p-button (click)="save()" [disabled]="!produtoForm.valid" label="Salvar" severity="success" size="small" pTooltip="Campos obrigatorios nao preenchidos" [tooltipDisabled]="produtoForm.valid"></p-button>-->
+<!--  </ng-template>-->
+</p-card>
+
+<p-divider></p-divider>
+
+<p-card>
+  <p-button (click)="save()" [disabled]="!produtoForm.valid" label="Salvar" severity="success" size="small" pTooltip="Campos obrigatorios nao preenchidos" [tooltipDisabled]="produtoForm.valid"></p-button>
 </p-card>
 
