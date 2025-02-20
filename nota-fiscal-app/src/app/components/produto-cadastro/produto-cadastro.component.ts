@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
-import {Produto} from '../../class/produto';
 import {Select} from 'primeng/select';
 import {FloatLabel} from 'primeng/floatlabel';
 import {Card} from 'primeng/card';
@@ -9,7 +8,6 @@ import {ProdutoService} from '../../services/produto.service';
 import {Button} from 'primeng/button';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Tooltip} from 'primeng/tooltip';
-import {Menubar} from 'primeng/menubar';
 import {Divider} from 'primeng/divider';
 
 @Component({
@@ -23,7 +21,6 @@ import {Divider} from 'primeng/divider';
     Card,
     Button,
     Tooltip,
-    Menubar,
     Divider
   ],
   templateUrl: './produto-cadastro.component.html',
