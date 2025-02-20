@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
@@ -62,13 +62,13 @@ export class ProdutoCadastroComponent {
       return;
     }
 
-    this.produtoService.save(this.produtoForm.value).subscribe(response => {
+    this.produtoService.save(this.produtoForm.value).subscribe(() => {
       this.router.navigate(['/produto']);
     });
   }
 
   update() {
-    this.produtoService.update(this.produtoId!, this.produtoForm.value).subscribe(response => {
+    this.produtoService.update(this.produtoId!, this.produtoForm.value).subscribe(() => {
       this.router.navigate(['/produto']);
     });
   }
